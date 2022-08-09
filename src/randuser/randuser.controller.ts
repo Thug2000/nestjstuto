@@ -6,8 +6,14 @@ export class RanduserController {
     constructor(private randuserService: RanduserService) {}
 
     @Get('/random')
-    async getRandom(@Res() res) {
+    async getRandom(): Promise<string> {
         const name = await this.randuserService.getRanduserName();
-        return res.status(HttpStatus.OK).json(name);
+        return name;
+    }
+
+    @Get('/fromurl')
+    async getFromUrl(@Res() res) {
+        const user = await this.randuserService.getUserFromUrl();
+        return res.status(HttpStatus.OK).json(user);
     }
 }
